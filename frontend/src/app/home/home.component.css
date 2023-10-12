@@ -1,0 +1,95 @@
+.search-bar{
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    margin: 20px;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+}
+
+h2{
+    text-align: center;
+    /* margin: 15px; */
+    padding: 20px;
+    font-weight: bolder;
+    color: red;
+    font-size: 50px;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Table header styles */
+th {
+    background-color: green;
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* Table row styles */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+/* Table hover effect */
+tr:hover {
+    background-color: lightblue;
+    color: black;
+}
+
+/* Center-align table */
+.table-container {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination{
+    display: inline-block;
+    margin-bottom: 90px;
+    /* margin-top: -10px; */
+    padding: 8px;
+    justify-self: center;
+    font-weight: bold;
+}
+
+span{
+    padding: 8px;
+    font-weight: bold;
+}
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-container button{
+    background-color: lightblue;
+}
+
+#homePage{
+    background-color:lightgoldenrodyellow;
+}

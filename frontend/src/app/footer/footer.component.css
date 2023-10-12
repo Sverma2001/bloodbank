@@ -1,0 +1,13 @@
+footer {
+    background-color: black;
+    color: yellow;
+    padding: 10px;
+    font-weight: bold;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.container {
+    text-align: center;
+}
