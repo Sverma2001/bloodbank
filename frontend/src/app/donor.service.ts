@@ -53,8 +53,8 @@ export class DonorService {
 // Deleting a donor from the data array
   async deleteDonor(serial_no: any){
     try {
-      await axios.delete(`http://localhost:3000/deleteDonor/${serial_no}`);
-      this.addInfoToast(`Donor with id ${serial_no} deleted`);
+      const deletedDonor = await axios.delete(`http://localhost:3000/deleteDonor/${serial_no}`);
+      this.addInfoToast(`Donor ${deletedDonor.data.name} deleted`);
     } catch (error) {
       console.error(error);
     }
