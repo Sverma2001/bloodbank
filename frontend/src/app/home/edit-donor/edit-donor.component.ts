@@ -11,9 +11,13 @@ import axios from 'axios';
 export class EditDonorComponent {
   UpdationForm: FormGroup;
   showForms: boolean = false;
+  editForm :boolean = false;
+  
+  // taking donor details from parent component
+  @Input('editDonorDetail') donor: any;   
 
   @Output() UpdateDonor = new EventEmitter<any>();   
-  constructor(private donorService: DonorService, private fb: FormBuilder) {}
+  constructor(private donorService: DonorService, private fb: FormBuilder) {};
 
   //adding form validation
   ngOnInit() {
@@ -25,9 +29,6 @@ export class EditDonorComponent {
       contact: new FormControl({ value: `${this.donor.contact}`, disabled: false}, [Validators.pattern('^[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]),
     });
   }
-
-  editForm :boolean = false;
-  @Input('editDonorDetail') donor: any;   // taking donor details from parent component
 
   ngDoCheck() {
     this.editForm = this.donorService.editForm;
@@ -51,10 +52,12 @@ export class EditDonorComponent {
         console.error('An error occurred during the update request:', error);
       }
     }
-    this.donorService.editForm = false;   // setting edit form to false after submitting
+    // setting edit form to false after submitting
+    this.donorService.editForm = false;   
   }
 
   hideForm() {
-    this.donorService.editForm = false;   //hiding edit form when closed button is clicked 
+    //hiding edit form when closed button is clicked
+    this.donorService.editForm = false;    
   }
 }

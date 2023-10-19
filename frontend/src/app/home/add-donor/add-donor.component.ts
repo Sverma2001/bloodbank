@@ -1,4 +1,4 @@
-import { Component,EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DonorService } from '../../donor.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import axios from 'axios';
@@ -9,12 +9,13 @@ import axios from 'axios';
   styleUrls: ['./add-donor.component.css']
 })
 export class AddDonorComponent {
-  showForms: boolean = false  // initially form is hidden
+  showForms: boolean = false;  // initially form is hidden
   RegistrationForm: FormGroup;
+  apiUrl = 'http://localhost:3000';
 
-  @Output () AddDonor = new EventEmitter<any>();  
+  @Output() AddDonor = new EventEmitter<any>();
 
-// adding form validation 
+  // adding form validation 
   constructor(private donorService: DonorService, private fb: FormBuilder) {
     this.RegistrationForm = this.fb.group({
       name: ['', Validators.required],
@@ -25,41 +26,42 @@ export class AddDonorComponent {
     });
   }
 
-  apiUrl = 'http://localhost:3000'
-
   ngDoCheck() {
-    this.showForms = this.donorService.getFormStatus()
+    this.showForms = this.donorService.getFormStatus();
   }
 
   async addDonor() {
     if (this.RegistrationForm.valid) {
-      let id = 0
+      let id = 0;
       try {
-        await axios.get(`${this.apiUrl}/getDonorId`)   // getting the id of the last donor
+        // getting the id of the last donor
+        await axios.get(`${this.apiUrl}/getDonorId`)
           .then((response) => {
-            id = response.data
+            id = response.data;
           })
 
-        const donorData = { serial_no: id, ...this.RegistrationForm.value }
-
-          try {
-            // adding donor to the database
-            await axios.post(`${this.apiUrl}/addDonor`, donorData);
-            this.AddDonor.emit();
-            this.donorService.addInfoToast(`${donorData.name} added successfully`);
-          } catch (error) {
-            console.error(error);
-          }
+        const donorData = { serial_no: id, ...this.RegistrationForm.value };
+        try {
+          // adding donor to the database
+          await axios.post(`${this.apiUrl}/addDonor`, donorData);
+          this.AddDonor.emit();
+          this.donorService.addInfoToast(`${donorData.name} added successfully`);
+        } catch (error) {
+          console.error(error);
         }
+      }
       catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-    this.RegistrationForm.reset()   //clearing form after submit
-    this.donorService.formStatus = false    //setting form status to false after submitting it
+    //clearing form after submit
+    this.RegistrationForm.reset();
+    //setting form status to false after submitting it
+    this.donorService.formStatus = false;
   }
 
   hideForm() {
-    this.donorService.formStatus = false   //hiding form when closed button is clicked
-  } 
+    //hiding form when closed button is clicked
+    this.donorService.formStatus = false;
+  }
 }
