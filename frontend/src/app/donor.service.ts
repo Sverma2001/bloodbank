@@ -1,19 +1,26 @@
-import { EventEmitter } from '@angular/core';
 import axios from 'axios';
+import { ToastService } from 'angular-toastify';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class DonorService {
   private apiUrl = 'http://localhost:3000';
+
+  constructor(private _toastService: ToastService) { }
 
   formStatus = false;
   editForm=false;
 
   donors : any[] = []   // list of donors of current page
   allDonors=[]  // list of all donors available in the database
-
+  
   totalPages: number;
   currentPage: number;
   data={donors:[],totalPages:1,currentPage:1}
-
+  
+  addInfoToast(message:any) {
+    this._toastService.info(message);
+  }
   getFormStatus(){
     return this.formStatus
   }
@@ -47,7 +54,7 @@ export class DonorService {
   async deleteDonor(serial_no: any){
     try {
       await axios.delete(`http://localhost:3000/deleteDonor/${serial_no}`);
-      console.log(`Donor with serial no ${serial_no} deleted`);
+      this.addInfoToast(`Donor with id ${serial_no} deleted`);
     } catch (error) {
       console.error(error);
     }

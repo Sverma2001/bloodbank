@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditDonorComponent } from './home/edit-donor/edit-donor.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { DonorService } from './donor.service';
+import { ToastService, AngularToastifyModule } from 'angular-toastify'; 
 
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { DonorService } from './donor.service';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AngularToastifyModule
   ],
-  providers: [DonorService],
+  providers: [DonorService,ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

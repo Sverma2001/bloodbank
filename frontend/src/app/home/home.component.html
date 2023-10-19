@@ -1,12 +1,12 @@
 <div id="homePage">
 <div>
     <h2>Blood Donors</h2>
+</div>
+
+<div *ngIf="!isTableEmpty ; else TableEmptyMessage" class="container">
     <div class="search-bar">
         <input type="text" [formControl]="searchControl" placeholder="Search..." (ngModelChange)="isSearching()">
     </div>
-</div>
-
-<div *ngIf="!isTableEmpty ; else TableEmptyMessage">
     <div class="table-container">
         <table>
             <thead>
@@ -29,7 +29,7 @@
                     <td>{{ donor.blood_group }}</td>
                     <td>{{ donor.address }}</td>
                     <td>{{ donor.contact }}</td>
-                    <td>{{ donor.createdAt | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ donor.createdAt | date:'dd-MM-yyyy' }}</td>
                     <td>
                         <button class="btn btn-info" style="margin-right: 5px; font-weight: bold; "
                             (click)="editDonors(donor)">Edit</button>
@@ -45,7 +45,7 @@
                     <td>{{ donors.blood_group }}</td>
                     <td>{{ donors.address }}</td>
                     <td>{{ donors.contact }}</td>
-                    <td>{{ donors.createdAt | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ donors.createdAt | date:'dd-MM-yyyy' }}</td>
                     <td>
                         <button class="btn btn-info" style="margin-right: 5px; font-weight: bold; "
                             (click)="editDonors(donors)">Edit</button>

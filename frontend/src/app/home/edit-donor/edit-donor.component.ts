@@ -24,8 +24,6 @@ export class EditDonorComponent {
       address: new FormControl({ value: `${this.donor.address}`, disabled: false}),
       contact: new FormControl({ value: `${this.donor.contact}`, disabled: false}, [Validators.pattern('^[0-9]+$'), Validators.minLength(10), Validators.maxLength(10)]),
     });
-
-    // this.donorService.UpdatedDonorData.subscribe(() => {});
   }
 
   editForm :boolean = false;
@@ -44,7 +42,7 @@ export class EditDonorComponent {
         const response = await axios.patch('http://localhost:3000/updateDonor', UpdatedDonorData);
   
         if (response.status === 201) {
-          alert(`${UpdatedDonorData.name} updated their data`);
+          this.donorService.addInfoToast(`${UpdatedDonorData.name} updated their data`);
           this.UpdateDonor.emit();
         } else {
           console.error('Update request failed:', response.statusText);

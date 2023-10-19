@@ -1,15 +1,10 @@
 const mongoose = require("mongoose");
-
-// const url = 'mongodb+srv://sverma:Sachin2001@blood-bank.jgkeavx.mongodb.net/donors?retryWrites=true&w=majority';
-
-const url = "mongodb://localhost:27017/blood-bank";
+require("dotenv").config();
 
 mongoose
-  .connect(url, {
+  .connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, // Timeout for server selection,
-    // ssl: true, // Enable SSL
   })
 
   .then(() => {

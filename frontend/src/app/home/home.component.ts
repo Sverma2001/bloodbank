@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
   //Search for donors based on a search term.
   search() {
     const searchTerm = this.searchControl.value ? this.searchControl.value.trim().toLowerCase() : '';
-
+    
     //adding filtered list of donors to the array filtered donors
     this.filteredDonors = this.loadedDonors.filter((donor: any) => {
       if (!searchTerm) {

@@ -43,9 +43,10 @@ export class AddDonorComponent {
         const donorData = { serial_no: id, ...this.RegistrationForm.value }
 
           try {
-            await axios.post(`${this.apiUrl}/addDonor`, donorData);  // adding donor to the database
+            // adding donor to the database
+            await axios.post(`${this.apiUrl}/addDonor`, donorData);
             this.AddDonor.emit();
-            alert(`${donorData.name} added successfully`);
+            this.donorService.addInfoToast(`${donorData.name} added successfully`);
           } catch (error) {
             console.error(error);
           }
