@@ -1,0 +1,43 @@
+<div >
+  <div id="backdrop"></div>
+
+  <div class="container">
+    <button id="overlay" (click)="hideForm()">X</button>
+    <h2>Update Your Data</h2>
+    <form [formGroup]="UpdationForm" (ngSubmit)="submitForm()">
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" [attr.disabled]="true">
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="text" id="age" formControlName="age" required>
+        <p *ngIf="UpdationForm.get('age')?.touched && UpdationForm.get('age').hasError('required')"
+          class="error">*Age is required</p>
+      </div>
+
+      <div class="form-group">
+        <label for="blood_group">Blood Group:</label>
+        <input type="text" id="blood_group" formControlName="blood_group" required>
+        <p *ngIf="UpdationForm.get('blood_group')?.touched && UpdationForm.get('blood_group').hasError('required')"
+          class="error">*Blood group is required</p>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" formControlName="address">
+      </div>
+
+      <div class="form-group">
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" formControlName="contact">
+        <p *ngIf="UpdationForm.get('contact').hasError('pattern')" class="error">*Please enter valid 10 Digit Number</p>
+      </div>
+
+      <button type="submit" class="btn" [disabled]="UpdationForm.invalid">Update Data</button>
+
+    </form>
+  </div>
+</div>

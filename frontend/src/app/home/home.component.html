@@ -1,0 +1,79 @@
+<div id="homePage">
+<div>
+    <h2>Blood Donors</h2>
+</div>
+
+<div *ngIf="!isTableEmpty ; else TableEmptyMessage" class="container">
+    <div class="search-bar">
+        <input type="text" [formControl]="searchControl" placeholder="Search..." (ngModelChange)="isSearching()">
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial No</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Blood Group</th>
+                    <th>Address</th>
+                    <th>Contact</th>
+                    <th>Last Donated</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!searching">
+                <tr *ngFor="let donor of donors">
+                    <td>{{ donor.serial_no }}</td>
+                    <td>{{ donor.name }}</td>
+                    <td>{{ donor.age }}</td>
+                    <td>{{ donor.blood_group }}</td>
+                    <td>{{ donor.address }}</td>
+                    <td>{{ donor.contact }}</td>
+                    <td>{{ donor.createdAt | date:'dd-MM-yyyy' }}</td>
+                    <td>
+                        <button class="btn btn-info" style="margin-right: 5px; font-weight: bold; "
+                            (click)="editDonors(donor)">Edit</button>
+                        <button class="btn btn-danger" style="font-weight: bold;" (click)="removeDonor(donor.serial_no)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="searching">
+                <tr *ngFor="let donors of filteredDonors">
+                    <td>{{ donors.serial_no }}</td>
+                    <td>{{ donors.name }}</td>
+                    <td>{{ donors.age }}</td>
+                    <td>{{ donors.blood_group }}</td>
+                    <td>{{ donors.address }}</td>
+                    <td>{{ donors.contact }}</td>
+                    <td>{{ donors.createdAt | date:'dd-MM-yyyy' }}</td>
+                    <td>
+                        <button class="btn btn-info" style="margin-right: 5px; font-weight: bold; "
+                            (click)="editDonors(donors)">Edit</button>
+                        <button class="btn btn-danger" style="font-weight: bold;" (click)="removeDonor(donors.serial_no)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <p>*Showing 10 of {{ loadedDonors.length }}</p> -->
+    </div>
+
+    <div class="pagination-container" *ngIf="!searching">
+
+        <button class="pagination" [disabled]="currPage === 1"
+            (click)="onPageChange(currPage - 1)">Previous</button>
+        <span>Page {{ currPage }} of {{ totalPages }}</span>
+
+        <button class="pagination" [disabled]="currPage === totalPages"
+            (click)="onPageChange(currPage + 1) ">Next</button>
+    </div>
+</div>
+
+
+<ng-template #TableEmptyMessage>
+    <h2>No Donors Found</h2>
+</ng-template>
+
+<app-add-donor (AddDonor)="loadDonors()"></app-add-donor>
+
+<app-edit-donor *ngIf="editForm" [editDonorDetail]="editDonor" (UpdateDonor)="loadDonors()"></app-edit-donor>
+</div>
